@@ -1,1 +1,88 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>حاسبة مؤشر كتلة الجسم (BMI) – إضافة متصفح</title>
+  <meta name="description" content="إضافة خفيفة لحساب مؤشر كتلة الجسم (BMI) لمتصفحات Chrome وEdge وOpera وFirefox. إدخال سريع للطول والوزن وتصنيف تلقائي للنتيجة." />
 
+  <!-- Open Graph -->
+  <meta property="og:title" content="حاسبة مؤشر كتلة الجسم (BMI) – إضافة متصفح">
+  <meta property="og:description" content="إضافة خفيفة لحساب BMI على Chrome وEdge وOpera وFirefox.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nedal-dev.github.io/bmi-calculator-extension/">
+  <meta property="og:image" content="assets/og.png"><!-- ارفع لاحقًا -->
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "حاسبة مؤشر كتلة الجسم (BMI)",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome, Edge, Opera, Firefox",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "Idraaak" },
+    "url": "https://nedal-dev.github.io/bmi-calculator-extension/",
+    "sameAs": [
+      "https://microsoftedge.microsoft.com/addons/detail/fdjlbapijgcfjoofphdjjidfhadmbeed",
+      "https://chromewebstore.google.com/detail/paijjngpmojhmddecgdcggmpkfbohddc",
+      "https://addons.mozilla.org/nl/firefox/addon/%D8%AD%D8%A7%D8%B3%D8%A8%D8%A9-%D9%85%D8%A4%D8%B4%D8%B1-%D9%83%D8%AA%D9%84%D8%A9-%D8%A7%D9%84%D8%AC%D8%B3%D9%85-bmi/"
+    ]
+  }
+  </script>
+
+  <style>
+    :root { --bg:#0b0e14; --card:#121723; --text:#e8eaed; --muted:#9aa0a6; --brand:#4f46e5; }
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Noto Naskh Arabic", Tahoma}
+    .wrap{max-width:900px;margin:0 auto;padding:32px 20px}
+    .card{background:var(--card);border:1px solid #22283a;border-radius:18px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    h1{margin:0 0 8px;font-size:28px}
+    p.lead{margin:0 0 18px;color:var(--muted)}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 8px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;text-decoration:none;color:#fff;font-weight:600}
+    .edge{background:#0078D7}.chrome{background:#4285F4}.opera{background:#ff1b2d}.firefox{background:#ff7139}
+    ul{margin:12px 0 0;padding:0 20px}
+    .footer{margin-top:22px;color:var(--muted);font-size:14px}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+    @media (max-width:820px){.grid{grid-template-columns:1fr}}
+    .shot{background:#0f1422;border:1px solid #22283a;border-radius:14px;padding:8px;text-align:center}
+    .shot img{max-width:100%;height:auto;border-radius:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>حاسبة مؤشر كتلة الجسم (BMI)</h1>
+      <p class="lead">إضافة خفيفة لمتصفحات <b>Chrome وEdge وOpera وFirefox</b> (ومتوافقة مع أغلب متصفحات كروميوم مثل Brave وVivaldi). تحسب BMI فورًا وتعرض الفئة: نحافة / طبيعي / زيادة وزن / سمنة.</p>
+
+      <div class="badges">
+        <a class="btn edge" href="https://microsoftedge.microsoft.com/addons/detail/fdjlbapijgcfjoofphdjjidfhadmbeed">تثبيت من Edge Add-ons</a>
+        <a class="btn chrome" href="https://chromewebstore.google.com/detail/paijjngpmojhmddecgdcggmpkfbohddc">تثبيت من Chrome Web Store</a>
+        <a class="btn firefox" href="https://addons.mozilla.org/nl/firefox/addon/%D8%AD%D8%A7%D8%B3%D8%A8%D8%A9-%D9%85%D8%A4%D8%B4%D8%B1-%D9%83%D8%AA%D9%84%D8%A9-%D8%A7%D9%84%D8%AC%D8%B3%D9%85-bmi/">تثبيت من Firefox Add-ons</a>
+        <!-- لو عندك رابط أوبرا فعّل السطر التالي واستبدل الرابط -->
+        <!-- <a class="btn opera" href="https://addons.opera.com/extensions/details/your-opera-slug">تثبيت من Opera Add-ons</a> -->
+      </div>
+
+      <div class="grid">
+        <div>
+          <h2 style="margin-top:10px">المزايا</h2>
+          <ul>
+            <li>إدخال سريع للطول (سم) والوزن (كغ).</li>
+            <li>تصنيف تلقائي للفئة وفق معايير شائعة.</li>
+            <li>يعمل محليًا داخل المتصفح، بدون تسجيل دخول.</li>
+          </ul>
+          <div class="footer">
+            الدعم: <a href="https://idraaak.com/" target="_blank" rel="noopener" style="color:#8ab4f8">idraaak.com</a> ·
+            سياسة الخصوصية: <a href="https://idraaak.com/privacy" target="_blank" rel="noopener" style="color:#8ab4f8">رابط</a>
+          </div>
+        </div>
+        <div class="shot">
+          <!-- ارفع صورك إلى docs/assets/ وغيّر المسار -->
+          <img src="assets/screen-1.png" alt="لقطة شاشة للإضافة">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
